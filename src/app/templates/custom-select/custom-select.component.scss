@@ -1,0 +1,36 @@
+.comp {
+  background-color: #e8ebed;
+  height: 3rem;
+  width: 104.8%;
+  border-radius: 5px 0 0 5px;
+  border-left: 2px solid #ff3399;
+  border-bottom: 2px solid #ff3399;
+  border-top: 2px solid #ff3399;
+  border-right: 2px solid #ff3399;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+ion-select {
+  justify-content: center;  
+  align-items: flex-end;
+}
+
+.selectCurrency{
+  margin-top: 5px;
+  height: 3rem;
+  border-bottom: 2px solid #ff3399;
+  border-top: 2px solid #ff3399;
+  border-right: 2px solid #ff3399;
+  display: flex;
+  justify-content: center;
+}
+
+.selectRow{
+  padding-top: 10%;
+}
+
+.test{
+  width: 100%; 
+}
