@@ -18,6 +18,10 @@ const routes: Routes = [
     path: 'stocks',
     loadChildren: () => import('./pages/stocks/stocks.module').then( m => m.StocksPageModule)
   },
+  {
+    path: 'crypto',
+    loadChildren: () => import('./pages/crypto/crypto.module').then( m => m.CryptoPageModule)
+  },
 
 
 ];
