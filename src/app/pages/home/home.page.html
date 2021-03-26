@@ -5,25 +5,39 @@
 
         <ion-row>
           <ion-col>
-            <app-custom-button icon="bar-chart" text="Stocks"></app-custom-button>
+            <app-custom-button
+            icon="bar-chart"
+              text="Stocks"
+            (click)="navigate('stocks')"
+            ></app-custom-button>
           </ion-col>
         </ion-row>
 
         <ion-row>
           <ion-col>
-            <app-custom-button icon="cash" text="Currency Conversion"></app-custom-button>
+            <app-custom-button
+            icon="cash"
+            text="Currency Conversion"
+            (click)="navigate('currency')"
+            ></app-custom-button>
           </ion-col>
         </ion-row>
 
         <ion-row>
           <ion-col>
-            <app-custom-button icon="logo-bitcoin" text="Crypto Conversion"></app-custom-button>
+            <app-custom-button
+            icon="logo-bitcoin"
+            text="Crypto Conversion"
+            ></app-custom-button>
           </ion-col>
         </ion-row>
 
         <ion-row>
           <ion-col >
-            <app-custom-button icon="save" text="Snapshot"></app-custom-button>
+            <app-custom-button
+            icon="save"
+            text="Snapshot"
+            ></app-custom-button>
           </ion-col>
         </ion-row>
 

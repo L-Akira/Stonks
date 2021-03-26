@@ -14,7 +14,11 @@ const routes: Routes = [
   {
     path: 'currencyConversion',
     loadChildren: () => import('./pages/currencyConversion/currencyConversion.module').then( m => m.CurrencyConversionPageModule)
+  },  {
+    path: 'stocks',
+    loadChildren: () => import('./pages/stocks/stocks.module').then( m => m.StocksPageModule)
   },
+
 
 ];
 

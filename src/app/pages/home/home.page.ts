@@ -11,10 +11,10 @@ export class HomePage implements OnInit{
   public logoSrc: string;
 
   private whereTo = {
-    'stocks': '/stocks',
-    'currency': '/currency',
-    'crypto': '/crypto',
-    'snapshot': '/snapshot',
+    stocks: '/stocks',
+    currency: '/currencyConversion',
+    crypto: '/crypto',
+    snapshot: '/snapshot',
   }
 
   constructor(
