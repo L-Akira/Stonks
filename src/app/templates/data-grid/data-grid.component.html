@@ -1,0 +1,67 @@
+<div id="grid-container">
+<ion-row class="title">
+  <ion-col>
+    {{data.title}}
+  </ion-col>
+</ion-row>
+
+<ion-row>
+  <ion-col class="item">
+    <ion-row>
+      Opening
+    </ion-row>
+    <ion-row>
+      {{data.opening}}
+    </ion-row>
+  </ion-col>
+
+  <ion-col class="item">
+    <ion-row>
+      Close
+    </ion-row>
+    <ion-row>
+      {{data.close}}
+    </ion-row>
+  </ion-col>
+</ion-row>
+
+<ion-row>
+  <ion-col class="item">
+    <ion-row>
+      High
+    </ion-row>
+    <ion-row>
+      {{data.high}}
+    </ion-row>
+  </ion-col>
+
+  <ion-col class="item">
+    <ion-row>
+      Volume
+    </ion-row>
+    <ion-row>
+      {{data.volume}}
+    </ion-row>
+  </ion-col>
+</ion-row>
+
+<ion-row>
+  <ion-col class="item">
+    <ion-row>
+      Low
+    </ion-row>
+    <ion-row>
+      {{data.low}}
+    </ion-row>
+  </ion-col>
+
+  <ion-col *ngIf="data.vwa" class="item">
+    <ion-row>
+      Volume Avg
+    </ion-row>
+    <ion-row>
+      {{data.vwa}}
+    </ion-row>
+  </ion-col>
+</ion-row>
+</div>
