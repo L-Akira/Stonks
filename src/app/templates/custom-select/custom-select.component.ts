@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { Output, EventEmitter } from '@angular/core';
 
 @Component({
@@ -7,21 +7,20 @@ import { Output, EventEmitter } from '@angular/core';
   styleUrls: ['./custom-select.component.scss'],
 })
 export class CustomSelectComponent implements OnInit {
-  selectOptionValue: string  = 'ARHOMBUS'
-  @Input () inputName: string
+  selectOptionValue: string;
+  @Input() inputName: string;
+  @Input() options?: string[];
+  @Output() newItemEvent = new EventEmitter<string>();
 
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    //temporary
+    if(!this.options)
+      this.options = ['option 1', 'option 2']
+  }
 
-
-  @Output() newItemEvent = new EventEmitter<string>()
-  
-    addNewItem() {
-      this.newItemEvent.emit(this.selectOptionValue);
-    }
-
-    
-    
-  
+  selectedOption() {
+    this.newItemEvent.emit(this.selectOptionValue);
+  }
 }
