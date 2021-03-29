@@ -2,11 +2,18 @@
   <ion-row class="ion-no-padding inputRow" >
     <ion-col class="test" size="4">
       <div class="comp">
-        <strong>{{inputName}}</strong> 
+        <strong>{{inputName}}</strong>
       </div>
     </ion-col>
     <ion-col class="selectCurrency ion-text-center" size="8">
-      <ion-input [(ngModel)]="inputData"  type="number" class="input" (ionChange)="addNewItem()" ></ion-input>
-    </ion-col>  
+      <ion-input
+      [(ngModel)]="inputData"
+      min={{min}}
+      max={{max}}
+      type="number"
+      class="input"
+      (ionChange)="numberInputed()"
+      ></ion-input>
+    </ion-col>
   </ion-row>
 </ion-grid>

@@ -3,16 +3,15 @@
   <ion-row class="ion-no-padding selectRow" >
     <ion-col class="test" size="4">
       <div class="comp">
-        <strong> {{inputName}} </strong> 
+        <strong> {{inputName}} </strong>
       </div>
     </ion-col>
     <ion-col class="selectCurrency ion-text-center" size="8">
-      <ion-select [(ngModel)]="selectOptionValue" (ionChange)="addNewItem()" 
-       placeholder="Selecione a moeda" interface="popover" > 
-        <ion-select-option value="BRL">BRL</ion-select-option>
-        <ion-select-option value="USD">USD</ion-select-option>
+      <ion-select [(ngModel)]="selectOptionValue" (ionChange)="selectedOption()"
+       placeholder="Selecione a moeda" interface="popover" >
+        <ion-select-option *ngFor="let option of options" value={{option}}>{{option}}</ion-select-option>
       </ion-select>
-    </ion-col>  
+    </ion-col>
   </ion-row>
 </ion-grid>
 

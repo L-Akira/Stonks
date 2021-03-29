@@ -7,18 +7,25 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./custom-input.component.scss'],
 })
 export class CustomInputComponent implements OnInit {
-  
-  @Input () inputName: string
-   inputData: number
+
+  @Input() inputName: string;
+  @Input() limit?: [min: string, max: string];;
+  @Output() newItemEvent = new EventEmitter<number | string >()
+
+  inputData: number;
+  min: string;
+  max: string;
+
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.min = this.limit[0];
+    this.max = this.limit[1];
+  }
 
-  @Output() newItemEvent = new EventEmitter<number | string >()
-  
-    addNewItem() {
-      this.newItemEvent.emit(this.inputData);
-    }
+  numberInputed() {
+    this.newItemEvent.emit(this.inputData);
+  }
 
-    
+
 }

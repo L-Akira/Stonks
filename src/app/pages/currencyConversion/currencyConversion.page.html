@@ -1,21 +1,35 @@
 
 <ion-content class="ion-padding">
-  <app-custom-select (newItemEvent)="sendCustomInput($event,'from')" inputName="From"></app-custom-select>
+  <app-custom-select
+  [options]="currencyOptions"
+  (newItemEvent)="handleCustomInput($event,'from')"
+  inputName="From"
+  ></app-custom-select>
 
-  <app-custom-select (newItemEvent)="sendCustomInput($event,'to')" inputName="To"></app-custom-select>
+  <app-custom-select
+  [options]="currencyOptions"
+  (newItemEvent)="handleCustomInput($event,'to')"
+  inputName="To"
+  ></app-custom-select>
 
-  <app-custom-input (newItemEvent)="sendCustomInput($event,'precision')" inputName="Precision" ></app-custom-input>
+  <app-custom-input
+  [limit]="limitPrecision"
+  (newItemEvent)="handleCustomInput($event,'precision')"
+  inputName="Precision"
+  ></app-custom-input>
 
-  <app-custom-input (newItemEvent)="sendCustomInput($event,'amount')" inputName="Amount" ></app-custom-input>
-  
+  <app-custom-input
+  [limit]="limitAmount"
+  (newItemEvent)="handleCustomInput($event,'amount')"
+  inputName="Amount"
+  ></app-custom-input>
 
   <div class = "submitBtn">
-    <app-custom-button text="Submit" (click)="submitForm()" ></app-custom-button>
+    <app-custom-button text="Submit" (click)="submitForm()"></app-custom-button>
   </div>
-  
 
   <div class="amountFormatted">
     <ion-text > ${{getAmount()}}</ion-text>
   </div>
-  
+
 </ion-content>
