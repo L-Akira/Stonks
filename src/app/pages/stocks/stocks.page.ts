@@ -22,7 +22,7 @@ export class StocksPage implements OnInit {
   previousDay: IgridDataDTO = {
     title: 'Previous Day',
     close: 209.23,
-    high: 215.56,
+    high: 275.56,
     volume: 24654896,
     low: 90.89,
     opening: 220.93,
