@@ -1,7 +1,7 @@
 <ion-content class="ion-padding">
   <app-header title="Crypto Conversion" redirect="home"></app-header>
-  <app-custom-select inputName="From"></app-custom-select>
-  <app-custom-select inputName="To"></app-custom-select>
+  <app-custom-select inputName="From" [options]="cryptoOptions" ></app-custom-select>
+  <app-custom-select inputName="To" [options]="currencyOptions" ></app-custom-select>
   <div class="submitBtn">
     <app-custom-button text="Converter"></app-custom-button>
   </div>

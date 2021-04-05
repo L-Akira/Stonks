@@ -7,9 +7,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CryptoPage implements OnInit {
 
+  currencyOptions;
+  cryptoOptions;
+
   constructor() { }
 
   ngOnInit() {
+    this.currencyOptions = [
+    'BRL',
+    'DOL',
+    'CAD',
+    'AOA',
+    'EUR'
+  ];
+
+  this.cryptoOptions = [
+    'BTC',
+    'ETH',
+  ];
   }
 
 }
