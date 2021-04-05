@@ -10,13 +10,23 @@ export class StocksPage implements OnInit {
 
   constructor() { }
 
-  stock: IgridDataDTO = {
+  dayStats: IgridDataDTO = {
     title: 'Day Stats',
     close: 119.23,
     high: 119.23,
-    volume: 119.23,
+    volume: 25131789,
     low: 111.33,
     opening: 333.33,
+  }
+
+  previousDay: IgridDataDTO = {
+    title: 'Previous Day',
+    close: 209.23,
+    high: 215.56,
+    volume: 24654896,
+    low: 90.89,
+    opening: 220.93,
+    vwa: 69.69
   }
 
   ngOnInit() {
