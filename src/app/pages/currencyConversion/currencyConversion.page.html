@@ -1,5 +1,6 @@
 
 <ion-content class="ion-padding">
+  <app-header title="Currency Conversion" redirect="home"></app-header>
   <app-custom-select
   [options]="currencyOptions"
   (newItemEvent)="handleCustomInput($event,'from')"
