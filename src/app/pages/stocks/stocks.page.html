@@ -1,7 +1,43 @@
 
 <ion-content>
-  <app-header title="Currency Conversion" redirect="home"></app-header>
+  <app-header title="Stocks" redirect="home"></app-header>
+    <ion-row class="select-line">
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Data</ion-label>
+          <ion-datetime (ionChange)="registerDate()" [(ngModel)]="datePicker" min="2000-01-01" displayFormat="DD/MM/YYYY" ></ion-datetime>
+        </ion-item>
+      </ion-col>
 
-  <app-data-grid [data]="dayStats"></app-data-grid>
-  <app-data-grid [data]="previousDay"></app-data-grid>
+      <ion-col id="ticker-select">
+        <ion-item>
+          <ion-label position="floating">Ticker</ion-label>
+          <ion-select [(ngModel)]="selectedTicker" interface="popover">
+            <ion-select-option *ngFor="let option of stockOptions" value={{option}}>{{option}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <div class="card">
+      <ion-row class="title">
+        <ion-text><strong>GME</strong></ion-text>
+      </ion-row>
+
+      <ion-row class="subtitle">
+        <ion-text>GameStop Corp</ion-text>
+      </ion-row>
+
+      <ion-row class="logo-row">
+        <img src="https://s3.polygon.io/logos/gme/logo.png"/>
+      </ion-row>
+
+      <ion-row class="price">
+          <ion-text>$100.33</ion-text>
+      </ion-row>
+    </div>
+
+    <app-data-grid [data]="dayStats"></app-data-grid>
+    <app-data-grid [data]="previousDay"></app-data-grid>
+
 </ion-content>
