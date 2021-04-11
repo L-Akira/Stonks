@@ -10,8 +10,16 @@ export class StocksPage implements OnInit {
 
   constructor() { }
 
+  datePicker: string;
+
+  selectedDate: string;
+
+  selectedTicker: string;
+
+  stockOptions:string[];
+
   dayStats: IgridDataDTO = {
-    title: 'Day Stats',
+    title: `Day Stats`,
     close: 119.23,
     high: 119.23,
     volume: 25131789,
@@ -29,7 +37,21 @@ export class StocksPage implements OnInit {
     vwa: 69.69
   }
 
+
   ngOnInit() {
+    this.stockOptions = [
+      'GME',
+      'AAPL',
+      'MSFT',
+      'TSLA',
+      'EA',
+      'ATVI'
+    ];
   }
+
+  registerDate() {
+    this.selectedDate = this.datePicker.substring(0, 10);
+  }
+
 
 }
