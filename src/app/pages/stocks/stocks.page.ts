@@ -12,7 +12,13 @@ export class StocksPage implements OnInit {
 
   datePicker: string;
 
+  firstFetch: boolean;
+
   selectedDate: string;
+
+  imageLink: string;
+
+  title: string;
 
   selectedTicker: string;
 
@@ -42,16 +48,36 @@ export class StocksPage implements OnInit {
     this.stockOptions = [
       'GME',
       'AAPL',
-      'MSFT',
+      'F',
+      'NVDA',
+      'NFLX',
       'TSLA',
       'EA',
       'ATVI'
     ];
+
+    this.firstFetch = true;
   }
 
   registerDate() {
     this.selectedDate = this.datePicker.substring(0, 10);
   }
 
+  fetchStock() {
+    if (!this.selectedDate || !this.selectedTicker)
+      return;
+
+    const titleDate = `${
+      this.selectedDate
+      .split('-')
+      .reverse()
+      .join('/')
+    } | ${this.selectedTicker}`;
+
+    this.firstFetch = false;
+    this.imageLink = `https://s3.polygon.io/logos/${this.selectedTicker.toLowerCase()}/logo.png`;
+    this.title = this.selectedTicker;
+    this.dayStats.title = titleDate;
+  }
 
 }
