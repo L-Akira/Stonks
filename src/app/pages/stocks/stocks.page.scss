@@ -1,11 +1,22 @@
 .select-line {
   align-items: center;
   height: fit-content;
-  width: 85%;
+  width: 100%;
+}
+
+#button {
+  height: 10%;
+  width: min-content;
+  text-align: center;
+  margin-bottom: 0;
+  padding-top: 8%;
+  padding-bottom: 0;
+  padding-right: 0;
 }
 
 #ticker-select {
   padding-bottom: 0;
+  width: fit-content;
 }
 .card {
   margin-top: 8%;

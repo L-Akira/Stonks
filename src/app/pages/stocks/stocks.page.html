@@ -17,11 +17,19 @@
           </ion-select>
         </ion-item>
       </ion-col>
+
+      <ion-col size="3" id="button">
+        <ion-button (click)="fetchStock()">
+          <ion-icon name="search"></ion-icon>
+        </ion-button>
+
+      </ion-col>
     </ion-row>
 
-    <div class="card">
+
+    <div *ngIf="!firstFetch" class="card">
       <ion-row class="title">
-        <ion-text><strong>GME</strong></ion-text>
+        <ion-text><strong>{{title}}</strong></ion-text>
       </ion-row>
 
       <ion-row class="subtitle">
@@ -29,7 +37,7 @@
       </ion-row>
 
       <ion-row class="logo-row">
-        <img src="https://s3.polygon.io/logos/gme/logo.png"/>
+        <img [src]="imageLink"/>
       </ion-row>
 
       <ion-row class="price">
@@ -37,7 +45,7 @@
       </ion-row>
     </div>
 
-    <app-data-grid [data]="dayStats"></app-data-grid>
-    <app-data-grid [data]="previousDay"></app-data-grid>
+    <app-data-grid *ngIf="!firstFetch" [data]="dayStats"></app-data-grid>
+    <app-data-grid *ngIf="!firstFetch" [data]="previousDay"></app-data-grid>
 
 </ion-content>
