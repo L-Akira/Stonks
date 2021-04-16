@@ -22,6 +22,10 @@ const routes: Routes = [
     path: 'crypto',
     loadChildren: () => import('./pages/crypto/crypto.module').then( m => m.CryptoPageModule)
   },
+  {
+    path: 'save',
+    loadChildren: () => import('./pages/save/save.module').then( m => m.SavePageModule)
+  },
 
 
 ];
