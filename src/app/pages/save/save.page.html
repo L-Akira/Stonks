@@ -1,0 +1,25 @@
+
+<ion-content>
+  <app-header title="Snapshot Details" redirect="home"></app-header>
+
+    <div class="card">
+      <ion-row class="title">
+        <ion-text><strong>{{dayStats.title}}</strong></ion-text>
+      </ion-row>
+
+      <ion-row class="subtitle">
+        <ion-text>GameStop Corp</ion-text>
+      </ion-row>
+
+      <ion-row class="logo-row">
+        <img src="https://s3.polygon.io/logos/gme/logo.png"/>
+      </ion-row>
+
+      <ion-row class="price">
+          <ion-text>$100.33</ion-text>
+      </ion-row>
+    </div>
+
+    <app-data-grid [data]="dayStats"></app-data-grid>
+
+</ion-content>
