@@ -1,0 +1,46 @@
+.item{
+  margin-top: 2px;
+  border-radius: 5px ;
+  border-left: 2px solid #ff3399;
+  border-bottom: 2px solid #ff3399;
+  border-top: 2px solid #ff3399;
+  border-right: 2px solid #ff3399;
+  font-family: Baloo Thambi 2;
+  
+ 
+}
+
+.snapshot-name{
+  font-weight: bold;
+  font-size: 19px;
+}
+
+.saved-date{
+  font-size: 10px;
+  color: #BEBEBE;
+}
+
+.stock-name{
+  margin-top: 5px;
+  font-weight: 500;
+  color: #000000;
+}
+
+.stock-corp-name{
+  margin-top: 5px;
+  font-size: 14px;
+  color: #BEBEBE;
+}
+
+.stock-price{
+  margin-top: 8px;
+  font-weight: bold;
+  font-size: 20px;
+  margin-left: 30%;
+}
+
+.stock-date{
+  margin-top: 8px;
+  font-size: 12px;
+  color: #BEBEBE;
+}

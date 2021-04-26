@@ -7,3 +7,5 @@ export default interface IgridDataDTO {
   low: number,
   vwa?: number,
 }
+
+

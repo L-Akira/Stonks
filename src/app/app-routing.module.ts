@@ -26,6 +26,10 @@ const routes: Routes = [
     path: 'save',
     loadChildren: () => import('./pages/save/save.module').then( m => m.SavePageModule)
   },
+  {
+    path: 'snapshot',
+    loadChildren: () => import('./pages/snapshot/snapshot.module').then( m => m.SnapshotPageModule)
+  },
 
 
 ];
