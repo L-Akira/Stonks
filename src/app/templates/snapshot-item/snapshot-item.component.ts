@@ -6,6 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./snapshot-item.component.scss'],
 })
 export class SnapshotItemComponent implements OnInit {
+  
 
   @Input() snapshotName: string
   @Input() savedDate: string
