@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IgridDataDTO } from 'src/app/dtos';
+import { stockObjectModel } from './stocks.model';
+import { StocksService } from './stocks.service';
 
 @Component({
   selector: 'app-stocks',
@@ -8,7 +10,9 @@ import { IgridDataDTO } from 'src/app/dtos';
 })
 export class StocksPage implements OnInit {
 
-  constructor() { }
+  constructor(private stocksService: StocksService) { }
+
+  stockSubmit: stockObjectModel;
 
   datePicker: string;
 
@@ -23,6 +27,8 @@ export class StocksPage implements OnInit {
   selectedTicker: string;
 
   stockOptions:string[];
+  
+  corpName: string;
 
   dayStats: IgridDataDTO = {
     title: `Day Stats`,
@@ -43,6 +49,7 @@ export class StocksPage implements OnInit {
     vwa: 69.69
   }
 
+  
 
   ngOnInit() {
     this.stockOptions = [
@@ -78,6 +85,28 @@ export class StocksPage implements OnInit {
     this.imageLink = `https://s3.polygon.io/logos/${this.selectedTicker.toLowerCase()}/logo.png`;
     this.title = this.selectedTicker;
     this.dayStats.title = titleDate;
+
+    this.stockSubmit = {
+      datePicker: this.datePicker,
+      firstFetch: this.firstFetch,
+      selectedDate: this.selectedDate,
+      imageLink: this.imageLink,
+      title: this.title,
+      selectedTicker: this.selectedTicker,
+      stockOptions: this.stockOptions,
+      close: this.dayStats.close,
+      high: this.dayStats.high,
+      volume: this.dayStats.volume,
+      low: this.dayStats.low,
+      opening: this.dayStats.opening,
+      vwa: this.dayStats.vwa,
+      corpName: ''
+    };
+   // console.log(this.stockSubmit.dayStats)
   }
 
+  submitSnapshot(){
+    this.stocksService.snapshotItems.push(this.stockSubmit)
+    console.log(this.stocksService.snapshotItems)
+  }
 }

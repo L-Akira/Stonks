@@ -22,12 +22,16 @@
         <ion-button (click)="fetchStock()">
           <ion-icon name="search"></ion-icon>
         </ion-button>
-
       </ion-col>
     </ion-row>
 
+   
 
     <div *ngIf="!firstFetch" class="card">
+      <ion-button  class="snapshotButton" (click)="submitSnapshot()">
+        <ion-icon name="camera-outline"></ion-icon>
+      </ion-button>
+
       <ion-row class="title">
         <ion-text><strong>{{title}}</strong></ion-text>
       </ion-row>
@@ -47,5 +51,5 @@
 
     <app-data-grid *ngIf="!firstFetch" [data]="dayStats"></app-data-grid>
     <app-data-grid *ngIf="!firstFetch" [data]="previousDay"></app-data-grid>
-
+    
 </ion-content>

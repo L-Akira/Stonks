@@ -3,24 +3,20 @@
   
   <app-header title="Snapshots" redirect="home"></app-header>
 
-  <app-snapshot-item 
-   snapshotName="Ação GameStop 10/04" 
-   savedDate="10/04/2021" 
-   stockName="GME"
-   stockCorpName="GameStop Corporation"
-   stockPrice="100.33"
-   stockDate="11/04/2021"
-   (click)="stockDetails(0)">
-   
-  </app-snapshot-item>
+  <ion-list >
+    <ion-item *ngFor="let snapshot of snapshotItems;let i = index" >
+      
+      <app-snapshot-item 
+        snapshotName="Title"
+        savedDate={{snapshot.datePicker}}
+        stockName={{snapshot.title}}
+        stockPrice={{snapshot.close}}
+        stockDate={{snapshot.datePicker}}
+        (click)="stockDetails(i)">
+      </app-snapshot-item>
+        
+    </ion-item>
+  </ion-list>
+
   
-  <app-snapshot-item 
-  snapshotName="Ação Nasdaq 10/04"
-  savedDate="10/04/2021"
-  stockName="AAPL"
-  stockCorpName="Apple Inc."
-  stockPrice="100.33"
-  stockDate="11/04/2021" 
-  (click)="stockDetails(1)">
-  </app-snapshot-item>
 </ion-content>

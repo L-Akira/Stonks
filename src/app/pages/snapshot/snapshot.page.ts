@@ -1,6 +1,8 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { snapshotItemDTO } from 'src/app/dtos';
+import { StocksService } from '../stocks/stocks.service';
+import { stockObjectModel } from '../stocks/stocks.model';
 
 
 @Component({
@@ -9,11 +11,23 @@ import { snapshotItemDTO } from 'src/app/dtos';
   styleUrls: ['./snapshot.page.scss'],
 })
 export class SnapshotPage implements OnInit {
-  snapshotItems: snapshotItemDTO[];
+  snapshotItems: stockObjectModel[] ;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,private stocksService: StocksService) { }
 
   ngOnInit() {
+    this.snapshotItems = this.stocksService.snapshotItems
+   // console.log(this.snapshotItems[0].dayStats)
+  }
+
+  stockDetails(position: number){
+    console.log(position)
+    this.router.navigate(['/save', this.snapshotItems[position]])
+  }
+  
+}
+
+/*
     this.snapshotItems = [
       {
         snapshotName:"Ação GameStop 10/04",
@@ -32,9 +46,4 @@ export class SnapshotPage implements OnInit {
         stockDate: "11/04/2021",
       },
     ]
-  }
-
-  stockDetails(position: number){
-    this.router.navigate(['/save', this.snapshotItems[position]])
-  }
-}
+    */

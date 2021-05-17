@@ -4,22 +4,19 @@
 
     <div class="card">
       <ion-row class="title">
-        <ion-text><strong>{{dayStats.title}}</strong></ion-text>
+        <ion-text><strong>{{snapshotItemCopy.title}}</strong></ion-text>
       </ion-row>
 
-      <ion-row class="subtitle">
-        <ion-text>{{snapshotItem.stockCorpName}}</ion-text>
-      </ion-row>
 
       <ion-row class="logo-row">
-        <img src="https://s3.polygon.io/logos/gme/logo.png"/>
+        <img src="{{imageLink}}"/>
       </ion-row>
 
       <ion-row class="price">
-          <ion-text>{{snapshotItem.stockPrice}}</ion-text>
+          <ion-text>{{snapshotItemCopy.close}}</ion-text>
       </ion-row>
     </div>
 
-    <app-data-grid [data]="dayStats"></app-data-grid>
+    <app-data-grid [data]="gridData"></app-data-grid>
 
 </ion-content>
