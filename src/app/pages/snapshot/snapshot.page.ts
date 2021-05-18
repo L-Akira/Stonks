@@ -16,15 +16,15 @@ export class SnapshotPage implements OnInit {
   constructor(private router: Router,private stocksService: StocksService) { }
 
   ngOnInit() {
-    this.snapshotItems = this.stocksService.snapshotItems
-   // console.log(this.snapshotItems[0].dayStats)
+    this.snapshotItems = this.stocksService.getData()
+    console.log(this.snapshotItems)
   }
 
   stockDetails(position: number){
     console.log(position)
     this.router.navigate(['/save', this.snapshotItems[position]])
   }
-  
+
 }
 
 /*
