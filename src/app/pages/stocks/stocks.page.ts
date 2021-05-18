@@ -1,4 +1,6 @@
+import { Storage } from '@ionic/storage-angular';
 import { Component, OnInit } from '@angular/core';
+import { ToastController } from '@ionic/angular';
 import { IgridDataDTO } from 'src/app/dtos';
 import { stockObjectModel } from './stocks.model';
 import { StocksService } from './stocks.service';
@@ -10,7 +12,7 @@ import { StocksService } from './stocks.service';
 })
 export class StocksPage implements OnInit {
 
-  constructor(private stocksService: StocksService) { }
+  constructor(private stocksService: StocksService, public toastController: ToastController, private storage: Storage) { }
 
   stockSubmit: stockObjectModel;
 
@@ -27,7 +29,7 @@ export class StocksPage implements OnInit {
   selectedTicker: string;
 
   stockOptions:string[];
-  
+
   corpName: string;
 
   dayStats: IgridDataDTO = {
@@ -49,7 +51,7 @@ export class StocksPage implements OnInit {
     vwa: 69.69
   }
 
-  
+
 
   ngOnInit() {
     this.stockOptions = [
@@ -102,11 +104,23 @@ export class StocksPage implements OnInit {
       vwa: this.dayStats.vwa,
       corpName: ''
     };
+
    // console.log(this.stockSubmit.dayStats)
   }
 
   submitSnapshot(){
-    this.stocksService.snapshotItems.push(this.stockSubmit)
-    console.log(this.stocksService.snapshotItems)
+    console.log(this.stocksService.getData())
+    this.stocksService.StorageSetData(this.stockSubmit)
+  }
+
+  async showToast(){
+    const toast = await this.toastController.create({
+      message: 'Stock Stats Saved',
+      duration: 2000,
+      color: 'primary',
+      keyboardClose: true,
+      cssClass: "toast.scss",
+    });
+    toast.present();
   }
 }

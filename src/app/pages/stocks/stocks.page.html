@@ -25,10 +25,10 @@
       </ion-col>
     </ion-row>
 
-   
+
 
     <div *ngIf="!firstFetch" class="card">
-      <ion-button  class="snapshotButton" (click)="submitSnapshot()">
+      <ion-button  class="snapshotButton" (click)="submitSnapshot(); showToast()">
         <ion-icon name="camera-outline"></ion-icon>
       </ion-button>
 
@@ -51,5 +51,5 @@
 
     <app-data-grid *ngIf="!firstFetch" [data]="dayStats"></app-data-grid>
     <app-data-grid *ngIf="!firstFetch" [data]="previousDay"></app-data-grid>
-    
+
 </ion-content>
