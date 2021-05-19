@@ -1,12 +1,12 @@
 
 <ion-content class="ion-padding">
-  
+
   <app-header title="Snapshots" redirect="home"></app-header>
 
   <ion-list >
-    <ion-item *ngFor="let snapshot of snapshotItems;let i = index" >
-      
-      <app-snapshot-item 
+    <ion-item lines="none" *ngFor="let snapshot of snapshotItems;let i = index" >
+
+      <app-snapshot-item
         snapshotName="Title"
         savedDate={{snapshot.datePicker}}
         stockName={{snapshot.title}}
@@ -14,9 +14,9 @@
         stockDate={{snapshot.datePicker}}
         (click)="stockDetails(i)">
       </app-snapshot-item>
-        
+
     </ion-item>
   </ion-list>
 
-  
+
 </ion-content>

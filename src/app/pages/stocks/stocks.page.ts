@@ -105,11 +105,11 @@ export class StocksPage implements OnInit {
       corpName: ''
     };
 
-   // console.log(this.stockSubmit.dayStats)
+    console.log(this.stockSubmit)
   }
 
   submitSnapshot(){
-    console.log(this.stocksService.getData())
+    console.log(this.stockSubmit)
     this.stocksService.StorageSetData(this.stockSubmit)
   }
 

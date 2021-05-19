@@ -12,12 +12,28 @@ export class StocksService {
 
   constructor(private storage: Storage) {
     this.storage.get('dados').then(val =>{
-      this.snapshotItems = val as stockObjectModel []
+      this.snapshotItems = val as stockObjectModel[]
     })
-   }
 
-   getData(){
-     return this.snapshotItems
+    if(this.snapshotItems === null)
+      this.storage.set('dados', [])
+
+  }
+
+  getData(){
+    this.storage.get('dados').then(val =>{
+      this.snapshotItems = val as stockObjectModel[]
+      console.log(val);
+    })
+
+    if(this.snapshotItems === null){
+      this.storage.set('dados', [])
+
+      this.storage.get('dados').then(val => {
+        this.snapshotItems = val as stockObjectModel[];
+      })
+    }
+    return this.snapshotItems
    }
 
    StorageSetData(item: stockObjectModel){
