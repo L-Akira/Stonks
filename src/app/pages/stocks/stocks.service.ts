@@ -37,6 +37,18 @@ export class StocksService {
    }
 
    StorageSetData(item: stockObjectModel){
+    this.storage.get('dados').then(val =>{
+      this.snapshotItems = val as stockObjectModel[]
+      console.log(val);
+    })
+
+    if(this.snapshotItems === null){
+      this.storage.set('dados', [])
+
+      this.storage.get('dados').then(val => {
+        this.snapshotItems = val as stockObjectModel[];
+      })
+    }
      this.snapshotItems.push(item)
      this.storage.set('dados', this.snapshotItems)
    }
