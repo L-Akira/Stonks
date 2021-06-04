@@ -29,8 +29,9 @@
     <app-custom-button text="Submit" (click)="submitForm()"></app-custom-button>
   </div>
 
-  <div class="amountFormatted">
-    <ion-text > ${{getAmount()}}</ion-text>
+  <div *ngIf="!searchError" class="amountFormatted">
+    <ion-text > {{result}}</ion-text>
   </div>
 
+  <app-error-box *ngIf="searchError" [message]="errorMessage"></app-error-box>
 </ion-content>

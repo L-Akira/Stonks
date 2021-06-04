@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { DataGridComponent } from './data-grid/data-grid.component';
 import { HeaderComponent } from './header/header.component';
 import { SnapshotItemComponent } from './snapshot-item/snapshot-item.component'
+import { ErrorBoxComponent } from './error-box/error-box.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { SnapshotItemComponent } from './snapshot-item/snapshot-item.component'
     CustomInputComponent,
     DataGridComponent,
     HeaderComponent,
-    SnapshotItemComponent
+    SnapshotItemComponent,
+    ErrorBoxComponent,
   ],
   exports: [
     CustomButtonComponent,
@@ -24,7 +26,8 @@ import { SnapshotItemComponent } from './snapshot-item/snapshot-item.component'
     CustomInputComponent,
     DataGridComponent,
     HeaderComponent,
-    SnapshotItemComponent
+    SnapshotItemComponent,
+    ErrorBoxComponent,
   ],
   imports: [
     IonicModule,

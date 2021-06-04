@@ -1,5 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from 'src/app/services/api.service';
 
 
 @Component({
@@ -17,8 +18,11 @@ export class CurrencyConversionPage implements OnInit {
   limitPrecision: [min: string, max: string ];
   limitAmount: [min: string, max: string ];
   currencyOptions: string[];
+  result: string;
+  searchError: boolean;
+  errorMessage: string;
 
-  constructor() { }
+  constructor(private service: ApiService) { }
 
   ngOnInit() {
     this.limitPrecision = ["0", "5"];
@@ -27,9 +31,11 @@ export class CurrencyConversionPage implements OnInit {
       'BRL',
       'USD',
       'CAD',
-      'AOA',
+      'CHF',
       'EUR'
     ];
+    this.result =  Number(this.formObject.amount).toFixed(Number(this.formObject.precision));
+    this.searchError = false;
   }
 
   handleCustomInput(data: string | number, formAttribute: string){
@@ -37,10 +43,21 @@ export class CurrencyConversionPage implements OnInit {
   }
 
   submitForm(){
-    console.log(this.formObject);
-  }
+    const {from, to, precision, amount} = this.formObject;
 
-  getAmount(){
-    return Number(this.formObject.amount).toFixed(Number(this.formObject.precision));
+    if(!(from && to && precision && amount))
+      return;
+
+    this.service.getCurrencyConv(this.formObject.from, this.formObject.to).subscribe((data) => {
+      const conversion = data.results[0].c;
+      this.result = (Number(this.formObject.amount) * conversion).toFixed(Number(this.formObject.precision));
+      this.searchError = false;
+    }, err => {
+      this.searchError = true;
+      this.errorMessage = err.status === 404 ?
+      'Stock não disponível nesta data'
+      :
+      'A api não esta em funcionamento';
+    })
   }
 }
