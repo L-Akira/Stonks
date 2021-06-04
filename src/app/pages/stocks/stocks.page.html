@@ -5,7 +5,7 @@
       <ion-col>
         <ion-item>
           <ion-label position="floating">Data</ion-label>
-          <ion-datetime (ionChange)="registerDate()" [(ngModel)]="datePicker" min="2000-01-01" displayFormat="DD/MM/YYYY" ></ion-datetime>
+          <ion-datetime (ionChange)="registerDate()" [(ngModel)]="datePicker" min="2000-01-01" max={{yesterday}} displayFormat="DD/MM/YYYY" ></ion-datetime>
         </ion-item>
       </ion-col>
 
@@ -27,7 +27,7 @@
 
 
 
-    <div *ngIf="!firstFetch" class="card">
+    <div *ngIf="!firstFetch && !searchError && !fetching" class="card">
       <ion-button  class="snapshotButton" (click)="submitSnapshot(); showToast()">
         <ion-icon name="camera-outline"></ion-icon>
       </ion-button>
@@ -37,7 +37,7 @@
       </ion-row>
 
       <ion-row class="subtitle">
-        <ion-text>GameStop Corp</ion-text>
+        <ion-text>{{corpName}}</ion-text>
       </ion-row>
 
       <ion-row class="logo-row">
@@ -45,11 +45,12 @@
       </ion-row>
 
       <ion-row class="price">
-          <ion-text>$100.33</ion-text>
+          <ion-text>${{dayStats.close}}</ion-text>
       </ion-row>
     </div>
 
-    <app-data-grid *ngIf="!firstFetch" [data]="dayStats"></app-data-grid>
-    <app-data-grid *ngIf="!firstFetch" [data]="previousDay"></app-data-grid>
+    <app-data-grid *ngIf="!firstFetch && !searchError && !fetching" [data]="dayStats"></app-data-grid>
+
+    <app-error-box *ngIf="searchError" [message]="errorMessage"></app-error-box>
 
 </ion-content>

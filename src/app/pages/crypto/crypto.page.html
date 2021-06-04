@@ -1,11 +1,25 @@
 <ion-content class="ion-padding">
   <app-header title="Crypto Conversion" redirect="home"></app-header>
-  <app-custom-select inputName="From" [options]="cryptoOptions" ></app-custom-select>
-  <app-custom-select inputName="To" [options]="currencyOptions" ></app-custom-select>
+
+  <app-custom-select
+  inputName="From"
+  [options]="cryptoOptions"
+  (newItemEvent)="handleCustomInput($event,'crypto')"
+  ></app-custom-select>
+
+  <app-custom-select
+  inputName="To"
+  [options]="currencyOptions"
+  (newItemEvent)="handleCustomInput($event,'coin')"
+  ></app-custom-select>
+
   <div class="submitBtn">
-    <app-custom-button text="Converter"></app-custom-button>
+    <app-custom-button text="Converter" (click)="fetchCrypto()"></app-custom-button>
   </div>
-  <ion-text class ="result">
-    $54,507.00
+
+  <ion-text *ngIf="!searchError" class ="result">
+    {{result + ' USD'}}
   </ion-text>
+
+  <app-error-box *ngIf="searchError" [message]="errorMessage"></app-error-box>
 </ion-content>
