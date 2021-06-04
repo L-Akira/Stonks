@@ -63,5 +63,6 @@ export class SnapshotPage implements OnInit {
     });
     toast.present();
   }
+
 }
 

@@ -4,6 +4,7 @@ import { ToastController } from '@ionic/angular';
 import { IgridDataDTO } from 'src/app/dtos';
 import { stockObjectModel } from './stocks.model';
 import { StocksService } from './stocks.service';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-stocks',
@@ -12,7 +13,12 @@ import { StocksService } from './stocks.service';
 })
 export class StocksPage implements OnInit {
 
-  constructor(private stocksService: StocksService, public toastController: ToastController, private storage: Storage) { }
+  constructor(
+    private stocksService: StocksService,
+    public toastController: ToastController,
+    private storage: Storage,
+    private service: ApiService,
+    ) { }
 
   stockSubmit: stockObjectModel;
 
@@ -32,6 +38,15 @@ export class StocksPage implements OnInit {
 
   corpName: string;
 
+  searchError: boolean;
+
+  fetching: boolean;
+
+  errorMessage: string;
+
+  yesterday: string;
+
+
   dayStats: IgridDataDTO = {
     title: `Day Stats`,
     close: 119.23,
@@ -40,18 +55,6 @@ export class StocksPage implements OnInit {
     low: 111.33,
     opening: 333.33,
   }
-
-  previousDay: IgridDataDTO = {
-    title: 'Previous Day',
-    close: 209.23,
-    high: 275.56,
-    volume: 24654896,
-    low: 90.89,
-    opening: 220.93,
-    vwa: 69.69
-  }
-
-
 
   ngOnInit() {
     this.stockOptions = [
@@ -62,10 +65,17 @@ export class StocksPage implements OnInit {
       'NFLX',
       'TSLA',
       'EA',
-      'ATVI'
+      'ATVI',
+      'INTC',
+      'AMD',
+      'TTWO',
+      'HEAR'
     ];
 
     this.firstFetch = true;
+    this.searchError = false;
+    this.yesterday = new Date((new Date()).valueOf() - 1000*60*60*24).toJSON().slice(0,10);
+    this.fetching = false;
   }
 
   registerDate() {
@@ -83,11 +93,40 @@ export class StocksPage implements OnInit {
       .join('/')
     } | ${this.selectedTicker}`;
 
-    this.firstFetch = false;
-    this.imageLink = `https://s3.polygon.io/logos/${this.selectedTicker.toLowerCase()}/logo.png`;
-    this.title = this.selectedTicker;
-    this.dayStats.title = titleDate;
+    this.fetching = true;
 
+    this.service.getStock(this.selectedDate, this.selectedTicker).subscribe((data) => {
+      this.searchError = false;
+      this.dayStats.close = data.close;
+      this.dayStats.high = data.high;
+      this.dayStats.low = data.low;
+      this.dayStats.opening = data.open;
+      this.dayStats.volume = data.volume;
+      this.imageLink = `https://s3.polygon.io/logos/${this.selectedTicker.toLowerCase()}/logo.png`;
+      this.title = this.selectedTicker;
+      this.dayStats.title = titleDate;
+    }, err => {
+      this.searchError = true;
+      this.errorMessage = err.status === 404 ?
+      'Stock não disponível nesta data'
+      :
+      'A api não esta em funcionamento';
+      this.firstFetch = false;
+    });
+
+    this.service.getStockMisc(this.selectedTicker).subscribe((data) => {
+      this.corpName = data.name;
+      this.firstFetch = false;
+      this.searchError = false;
+    }, err => {
+      this.errorMessage = 'A api não esta em funcionamento';
+      this.searchError = true;
+    })
+
+    this.fetching = false;
+  }
+
+  submitSnapshot(){
     this.stockSubmit = {
       datePicker: this.datePicker,
       firstFetch: this.firstFetch,
@@ -102,12 +141,9 @@ export class StocksPage implements OnInit {
       low: this.dayStats.low,
       opening: this.dayStats.opening,
       vwa: this.dayStats.vwa,
-      corpName: ''
+      corpName: this.corpName,
     };
-
-  }
-
-  submitSnapshot(){
+    console.log(this.stockSubmit)
     this.stocksService.StorageSetData(this.stockSubmit)
   }
 
