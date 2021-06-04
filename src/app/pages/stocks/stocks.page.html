@@ -22,12 +22,16 @@
         <ion-button (click)="fetchStock()">
           <ion-icon name="search"></ion-icon>
         </ion-button>
-
       </ion-col>
     </ion-row>
 
 
+
     <div *ngIf="!firstFetch" class="card">
+      <ion-button  class="snapshotButton" (click)="submitSnapshot(); showToast()">
+        <ion-icon name="camera-outline"></ion-icon>
+      </ion-button>
+
       <ion-row class="title">
         <ion-text><strong>{{title}}</strong></ion-text>
       </ion-row>

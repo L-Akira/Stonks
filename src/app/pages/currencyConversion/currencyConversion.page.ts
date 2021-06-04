@@ -14,15 +14,15 @@ export class CurrencyConversionPage implements OnInit {
     'precision': null,
     'amount': null,
   }
-  limitPrecision: string[];
-  limitAmount: string[];
+  limitPrecision: [min: string, max: string ];
+  limitAmount: [min: string, max: string ];
   currencyOptions: string[];
 
   constructor() { }
 
   ngOnInit() {
     this.limitPrecision = ["0", "5"];
-    this.limitAmount = ["0"];
+    this.limitAmount = ["0", "10000000000"];
     this.currencyOptions = [
       'BRL',
       'USD',
@@ -32,7 +32,7 @@ export class CurrencyConversionPage implements OnInit {
     ];
   }
 
-  handleCustomInput(data: string, formAttribute: string){
+  handleCustomInput(data: string | number, formAttribute: string){
     this.formObject[formAttribute] = data;
   }
 

@@ -11,8 +11,7 @@ export class SnapshotItemComponent implements OnInit {
   @Input() snapshotName: string
   @Input() savedDate: string
   @Input() stockName: string
-  @Input() stockCorpName: string
-  @Input() stockPrice: number
+  @Input() stockPrice: string
   @Input() stockDate: string
   
   constructor() { }

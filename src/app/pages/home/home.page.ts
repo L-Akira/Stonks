@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import logo from 'src/assets/logo';
+import { Storage } from '@ionic/storage-angular'
 
 @Component({
   selector: 'app-home',
@@ -19,10 +20,16 @@ export class HomePage implements OnInit{
 
   constructor(
     private router: Router,
+    private storage: Storage
   ) {}
 
-  ngOnInit(){
+  async ngOnInit(){
     this.logoSrc = logo;
+    const local = await this.storage.get('dados');
+    
+    if(local === null)
+      this.storage.set('dados', []);
+
   }
 
   navigate(str: string) {

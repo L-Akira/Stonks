@@ -9,7 +9,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class CustomInputComponent implements OnInit {
 
   @Input() inputName: string;
-  @Input() limit?: [min: string, max: string];;
+  @Input() limit?: [min: string, max: string ];
   @Output() newItemEvent = new EventEmitter<number | string >()
 
   inputData: number;

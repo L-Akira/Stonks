@@ -1,6 +1,8 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IgridDataDTO, snapshotItemDTO } from 'src/app/dtos';
+import { stockObjectModel } from '../stocks/stocks.model';
+import { StocksService } from '../stocks/stocks.service';
 
 @Component({
   selector: 'app-stocks',
@@ -10,27 +12,22 @@ import { IgridDataDTO, snapshotItemDTO } from 'src/app/dtos';
 
 @Injectable()
 export class SavePage implements OnInit {
-  snapshotItem: snapshotItemDTO;
-  dayStats: IgridDataDTO;
-  constructor(public route: ActivatedRoute) {
+  snapshotItemCopy: stockObjectModel;
+  gridData: IgridDataDTO;
+  imageLink: string = "";
 
-  
+  constructor(public route: ActivatedRoute, private stocksService: StocksService) {
+
    }
-
-  
 
 
   ngOnInit() {
-    this.route.params.subscribe(params => { this.snapshotItem = params as snapshotItemDTO })
-    console.log(this.snapshotItem)
-    this.dayStats = {
-      title: this.snapshotItem.stockName,
-      close: 119.23,
-      high: 119.23,
-      volume: 25131789,
-      low: 111.33,
-      opening: 333.33,
-    }
+    this.route.params.subscribe(params => {console.log(params); this.snapshotItemCopy = params as stockObjectModel })
+    
+    this.gridData = {...this.snapshotItemCopy}
+     
+    
+    this.imageLink = `https://s3.polygon.io/logos/${this.snapshotItemCopy.title.toLowerCase()}/logo.png`
   }
 
 

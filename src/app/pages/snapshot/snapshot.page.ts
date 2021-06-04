@@ -1,6 +1,8 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { snapshotItemDTO } from 'src/app/dtos';
+import { StocksService } from '../stocks/stocks.service';
+import { stockObjectModel } from '../stocks/stocks.model';
+import { ToastController } from '@ionic/angular';
 
 
 @Component({
@@ -9,32 +11,57 @@ import { snapshotItemDTO } from 'src/app/dtos';
   styleUrls: ['./snapshot.page.scss'],
 })
 export class SnapshotPage implements OnInit {
-  snapshotItems: snapshotItemDTO[];
+  snapshotItems: stockObjectModel[];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private stocksService: StocksService, private toastCtrl: ToastController) { }
 
   ngOnInit() {
-    this.snapshotItems = [
-      {
-        snapshotName:"Ação GameStop 10/04",
-        savedDate:"10/04/2021",
-        stockName:"GME",
-        stockCorpName: "GameStop Corporation",
-        stockPrice: 100.33,
-        stockDate: "11/04/2021",
-      },
-      {
-        snapshotName:"Ação Apple 10/04",
-        savedDate:"10/04/2021",
-        stockName:"AAPL",
-        stockCorpName: "Apple Inc.",
-        stockPrice: 100.33,
-        stockDate: "11/04/2021",
-      },
-    ]
+    this.snapshotItems = this.stocksService.getData()
   }
 
+  ionViewWillEnter(){
+    this.snapshotItems = this.stocksService.getData()
+  }
+ 
   stockDetails(position: number){
-    this.router.navigate(['/save', this.snapshotItems[position]])
+    this.router.navigate(['/save', this.stocksService.getData()[position]])
+  }
+
+  isSnapshotItemsEmpty(){
+    return this.snapshotItems.length === 0
+}
+
+  callDeleteSnapshotFromStorage(index: number){
+    this.stocksService.deleteSnapshotFromStorage(index)
+  }
+
+  callDeleteAllSnapshotsFromStorage(){
+    this.stocksService.deleteAllSnapshotsFromStorage()
+  }
+
+  async showSingleDeleteToast(){
+    const toast = await this.toastCtrl.create({
+      message: 'Snapshot Deleted Susccessfully',
+      duration: 2000,
+      color: 'primary',
+      keyboardClose: true,
+      cssClass: "toast.scss",
+    });
+    toast.present();
+  }
+
+  async showDeleteAllToast(){
+    const toast = await this.toastCtrl.create({
+      message: 
+        this.isSnapshotItemsEmpty() 
+         ?'Snapshots List Already Empty!'
+         :'All Snapshots Deleted Susccessfully',
+      duration: 2000,
+      color: 'primary',
+      keyboardClose: true,
+      cssClass: "toast.scss",
+    });
+    toast.present();
   }
 }
+
