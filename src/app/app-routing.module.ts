@@ -32,8 +32,6 @@ const routes: Routes = [
     path: 'snapshot',
     loadChildren: () => import('./pages/snapshot/snapshot.module').then( m => m.SnapshotPageModule)
   },
-
-
 ];
 
 @NgModule({

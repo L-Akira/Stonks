@@ -3,10 +3,15 @@
 
   <app-header title="Snapshots" redirect="home"></app-header>
 
+  <ion-button class="deleteAllBtn" (click)="callDeleteAllSnapshotsFromStorage(); showDeleteAllToast()">
+    <ion-icon name="trash-outline" slot="start"></ion-icon>
+    Delete All
+  </ion-button>
   <ion-list >
     <ion-item lines="none" *ngFor="let snapshot of snapshotItems;let i = index" >
 
       <app-snapshot-item
+        class="item"
         snapshotName="Title"
         savedDate={{snapshot.datePicker}}
         stockName={{snapshot.title}}
@@ -15,6 +20,9 @@
         (click)="stockDetails(i)">
       </app-snapshot-item>
 
+      <ion-button class="remove" (click)="callDeleteSnapshotFromStorage(i); showSingleDeleteToast()">
+        <ion-icon name="trash-outline" ></ion-icon>
+      </ion-button>
     </ion-item>
   </ion-list>
 

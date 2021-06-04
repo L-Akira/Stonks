@@ -1,6 +1,9 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 import { stockObjectModel } from './stocks.model';
+import { NavController } from '@ionic/angular';
+
 
 
 @Injectable({
@@ -10,7 +13,7 @@ export class StocksService {
 
   snapshotItems: stockObjectModel[];
 
-  constructor(private storage: Storage) {
+  constructor(private storage: Storage, private router: Router, private navCtrl: NavController) {
     this.storage.get('dados').then(val =>{
       this.snapshotItems = val as stockObjectModel[]
     })
@@ -23,7 +26,6 @@ export class StocksService {
   getData(){
     this.storage.get('dados').then(val =>{
       this.snapshotItems = val as stockObjectModel[]
-      console.log(val);
     })
 
     if(this.snapshotItems === null){
@@ -39,7 +41,6 @@ export class StocksService {
    StorageSetData(item: stockObjectModel){
     this.storage.get('dados').then(val =>{
       this.snapshotItems = val as stockObjectModel[]
-      console.log(val);
     })
 
     if(this.snapshotItems === null){
@@ -52,4 +53,21 @@ export class StocksService {
      this.snapshotItems.push(item)
      this.storage.set('dados', this.snapshotItems)
    }
+
+   deleteAllSnapshotsFromStorage(){
+     this.snapshotItems = []
+     this.storage.set('dados', this.snapshotItems)
+     this.navCtrl.navigateBack('/home')
+  }
+
+   deleteSnapshotFromStorage(index: number){
+     let itemToBeDeleted = this.snapshotItems[index]
+     let newSnapshotItems: stockObjectModel[] = this.snapshotItems.filter(snap =>
+       snap !== itemToBeDeleted)
+     this.snapshotItems = newSnapshotItems
+     this.storage.set('dados', this.snapshotItems)
+     this.navCtrl.navigateBack('/home')
+   }
+
+  
 }
